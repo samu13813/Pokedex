@@ -9,8 +9,18 @@ let pokemonRepository = (function() {
     return pokemonList;
   }
 
+// below function compares if the input is an object, and its object.keys, by converting this last value to a string.
+// if everything is true, then pushes the new pokemon to pokemonList
+
   function add(pokemon) {
-    pokemonList.push(pokemon);
+
+    let newPokemonToString = Object.keys(pokemon).toString();
+
+    if (typeof(pokemon) === 'object' && newPokemonToString === 'name,height,types') {
+      pokemonList.push(pokemon);
+    } else {
+      console.log('Please introduce a valid object')
+    }
   }
 
   return {
