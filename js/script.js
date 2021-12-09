@@ -7,10 +7,10 @@ let pokemonList = [
 // for loop that displays names / heights of each pokemon in the above list
 //and checks if the height is larger than 6, and if it is, displays a text
 
-for (let i=0; i<pokemonList.length; i++){
-  if (pokemonList[i].height >= 6){
-    document.write('<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height +  ') - Wow, that\'s big!</p>');
+pokemonList.forEach(function(item){
+  if (item.height >= 6){
+    document.write('<p>' + item.name + ' (height: ' + item.height +  ') - Wow, that\'s big!</p>');
   } else {
-    document.write('<p>' + pokemonList[i].name + ' (height: ' + pokemonList[i].height +  ')</p>');
+    document.write('<p>' + item.name + ' (height: ' + item.height +  ')</p>');
   }
-}
+});
