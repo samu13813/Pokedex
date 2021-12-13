@@ -34,9 +34,14 @@ let pokemonRepository = (function() {
 // and checks if the height is larger than 6, and if it is, displays a text
 
 pokemonRepository.getAll().forEach(function(item){
-  if (item.height >= 6){
-    document.write('<p>' + item.name + ' (height: ' + item.height +  ') - Wow, that\'s big!</p>');
-  } else {
-    document.write('<p>' + item.name + ' (height: ' + item.height +  ')</p>');
-  }
+  let pokeList = document.querySelector('ul');
+  let listItem = document.createElement('li');
+  let button = document.createElement('button');
+
+  button.innerText = item.name;
+  button.classList.add('tab');
+  listItem.appendChild(button);
+  pokeList.appendChild(listItem);
+
+
 });
