@@ -1,3 +1,5 @@
+//INSIDE IIFE
+
 let pokemonRepository = (function() {
   let pokemonList = [
     {name: 'Ponyta', height: 1, types: ['fire']},
@@ -23,6 +25,8 @@ let pokemonRepository = (function() {
     }
   }
 
+// below function adds the pokemon to the list
+
   function addListItem(pokemon) {
     let pokeList = document.querySelector('ul');
     let listItem = document.createElement('li');
@@ -42,8 +46,9 @@ let pokemonRepository = (function() {
 
 })();
 
-// for loop that displays names / heights of each pokemon in the above list
-// and checks if the height is larger than 6, and if it is, displays a text
+//OUTISDE IIFE
+
+// below for loop to show each pokemon in pokemonList in a UL/IL
 
 pokemonRepository.getAll().forEach(function(item){
   pokemonRepository.addListItem(item);
