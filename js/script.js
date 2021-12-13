@@ -15,7 +15,6 @@ let pokemonRepository = (function() {
 // if everything is true, then pushes the new pokemon to pokemonList
 
   function add(pokemon) {
-
     let newPokemonToString = Object.keys(pokemon).toString();
 
     if (typeof(pokemon) === 'object' && newPokemonToString === 'name,height,types') {
@@ -36,12 +35,21 @@ let pokemonRepository = (function() {
     button.classList.add('tab');
     listItem.appendChild(button);
     pokeList.appendChild(listItem);
+
+    button.addEventListener('click', function(event){
+      showDetails(pokemon);
+    });
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
   }
 
   return {
     getAll: getAll,
     add: add,
-    addListItem: addListItem
+    addListItem: addListItem,
+    showDetails: showDetails
   };
 
 })();
