@@ -23,9 +23,21 @@ let pokemonRepository = (function() {
     }
   }
 
+  function addListItem(pokemon) {
+    let pokeList = document.querySelector('ul');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+
+    button.innerText = pokemon.name;
+    button.classList.add('tab');
+    listItem.appendChild(button);
+    pokeList.appendChild(listItem);
+  }
+
   return {
     getAll: getAll,
-    add: add
+    add: add,
+    addListItem: addListItem
   };
 
 })();
@@ -34,14 +46,5 @@ let pokemonRepository = (function() {
 // and checks if the height is larger than 6, and if it is, displays a text
 
 pokemonRepository.getAll().forEach(function(item){
-  let pokeList = document.querySelector('ul');
-  let listItem = document.createElement('li');
-  let button = document.createElement('button');
-
-  button.innerText = item.name;
-  button.classList.add('tab');
-  listItem.appendChild(button);
-  pokeList.appendChild(listItem);
-
-
+  pokemonRepository.addListItem(item);
 });
