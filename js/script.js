@@ -1,11 +1,8 @@
 //INSIDE IIFE
 
 let pokemonRepository = (function() {
-  let pokemonList = [
-    {name: 'Ponyta', height: 1, types: ['fire']},
-    {name: 'Lugia', height: 5.2, types: ['psychic', 'flying']},
-    {name: 'Rayquaza', height: 7, types: ['dragon', 'flying']}
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function getAll() {
     return pokemonList;
@@ -17,7 +14,7 @@ let pokemonRepository = (function() {
   function add(pokemon) {
     let newPokemonToString = Object.keys(pokemon).toString();
 
-    if (typeof(pokemon) === 'object' && newPokemonToString === 'name,height,types') {
+    if (typeof(pokemon) === 'object' && 'name' in pokemon) {
       pokemonList.push(pokemon);
     } else {
       console.log('Please introduce a valid object');
@@ -42,14 +39,48 @@ let pokemonRepository = (function() {
   };
 
   function showDetails(pokemon) {
-    console.log(pokemon);
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
+  };
+
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  };
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
   };
 
   return {
     getAll: getAll,
     add: add,
     addListItem: addListItem,
-    showDetails: showDetails
+    showDetails: showDetails,
+    loadList: loadList,
+    loadDetails: loadDetails
   };
 
 })();
@@ -58,6 +89,10 @@ let pokemonRepository = (function() {
 
 // below for loop to show each pokemon in pokemonList in a UL/IL
 
-pokemonRepository.getAll().forEach(function(item){
-  pokemonRepository.addListItem(item);
+
+
+pokemonRepository.loadList().then(function() {
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
