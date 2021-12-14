@@ -9,7 +9,7 @@ let pokemonRepository = (function() {
 
   function getAll() {
     return pokemonList;
-  }
+  };
 
 // below function compares if the input is an object, and its object.keys, by converting this last value to a string.
 // if everything is true, then pushes the new pokemon to pokemonList
@@ -20,9 +20,9 @@ let pokemonRepository = (function() {
     if (typeof(pokemon) === 'object' && newPokemonToString === 'name,height,types') {
       pokemonList.push(pokemon);
     } else {
-      console.log('Please introduce a valid object')
+      console.log('Please introduce a valid object');
     }
-  }
+  };
 
 // below function adds the pokemon to the list
 
@@ -39,11 +39,11 @@ let pokemonRepository = (function() {
     button.addEventListener('click', function(event){
       showDetails(pokemon);
     });
-  }
+  };
 
   function showDetails(pokemon) {
     console.log(pokemon);
-  }
+  };
 
   return {
     getAll: getAll,
