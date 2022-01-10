@@ -8,8 +8,8 @@ let pokemonRepository = (function() {
     return pokemonList;
   };
 
-  // below function compares if the input is an object, and its object.keys, by converting this last value to a string.
-  // if everything is true, then pushes the new pokemon to pokemonList
+// below function compares if the input is an object, and its object.keys, by converting this last value to a string.
+// if everything is true, then pushes the new pokemon to pokemonList
 
   function add(pokemon) {
     let newPokemonToString = Object.keys(pokemon).toString();
@@ -21,7 +21,7 @@ let pokemonRepository = (function() {
     }
   };
 
-  // below function adds the pokemon to the list
+// below function adds the pokemon to the list
 
   function addListItem(pokemon) {
     let pokeList = document.querySelector('ul');
@@ -34,22 +34,23 @@ let pokemonRepository = (function() {
     listItem.appendChild(button);
     pokeList.appendChild(listItem);
 
-    button.addEventListener('click', function(event) {
+    button.addEventListener('click', function(event){
       showDetails(pokemon);
     });
   };
 
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function() {
+    loadDetails(pokemon).then(function () {
       let pokemonNameCapital = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-      showModal(pokemonNameCapital, pokemon.height, pokemon.imageUrl);
+      let firstType = pokemon.types[0].type.name;
+      showModal(pokemonNameCapital, pokemon.height, pokemon.imageUrl, firstType);
     });
   };
 
-  let modalContainer = document.querySelector('#modal-container');
+let modalContainer = document.querySelector('#modal-container');
 
-  function showModal(name, height, image, types) {
 
+  function showModal(name, height, image, firstType) {
     modalContainer.innerHTML = '';
     let modal = document.createElement('div');
     modal.classList.add('modal');
@@ -66,12 +67,17 @@ let pokemonRepository = (function() {
     pokemonHeight.innerText = 'Height: ' + height;
 
     let pokemonImage = document.createElement('img');
+    pokemonImage.classList.add('pokemon-image');
     pokemonImage.src = image;
 
+    let pokemonType = document.createElement('img');
+    pokemonType.classList.add('type-image');
+    pokemonType.src = './images/' + firstType + '.png';
 
     modal.appendChild(pokemonImage);
     modal.appendChild(pokemonName);
     modal.appendChild(pokemonHeight);
+    modal.appendChild(pokemonType);
     modal.appendChild(closeButtonElement);
     modalContainer.appendChild(modal);
 
@@ -100,17 +106,17 @@ let pokemonRepository = (function() {
   });
 
   function loadList() {
-    return fetch(apiUrl).then(function(response) {
+    return fetch(apiUrl).then(function (response) {
       return response.json();
-    }).then(function(json) {
-      json.results.forEach(function(item) {
+    }).then(function (json) {
+      json.results.forEach(function (item) {
         let pokemon = {
           name: item.name,
           detailsUrl: item.url
         };
         add(pokemon);
       });
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.error(e);
     })
   };
@@ -118,13 +124,13 @@ let pokemonRepository = (function() {
   function loadDetails(item) {
     let url = item.detailsUrl;
 
-    return fetch(url).then(function(response) {
+    return fetch(url).then(function (response) {
       return response.json();
-    }).then(function(details) {
+    }).then(function (details) {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.error(e);
     });
   };
@@ -147,7 +153,7 @@ let pokemonRepository = (function() {
 
 
 pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function(pokemon) {
+  pokemonRepository.getAll().forEach(function(pokemon){
     pokemonRepository.addListItem(pokemon);
   });
 });
