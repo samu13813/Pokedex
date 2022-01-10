@@ -5,13 +5,16 @@ body {
   font-size: 28px;
   line-height: 2;
   text-align: center;
-  margin: 50px auto;
+  margin: 0px auto;
 }
-
-
 
 ul {
   padding-inline-start: 0px;
+}
+
+.main-title {
+  font-family: 'Mochiy Pop P One', sans-serif;
+  margin:0px;
 }
 
 .pokemon-list {
@@ -71,6 +74,7 @@ ul {
 
 .modal {
   margin: auto;
+  line-height: 1.2;
   background-color: #fef7c1;
   display: inline-block;
   box-sizing: border-box;
@@ -83,10 +87,21 @@ ul {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-img {
+.pokemon-image {
   width: 100%;
   border: 5px solid #000;
   background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.type-image {
+  float: left;
+  width: 36px;
+  height: 36px;
+}
+
+.pokemon-stats {
+  border: 5px solid #000;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
@@ -96,12 +111,19 @@ img {
   -webkit-appearance: none;
   border: 0;
   background: none;
-  color: #777;
+  color: #000;
   text-decoration: underline;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 60%;
+  text-decoration: none;
 }
 
 .modal h1 {
-  margin-top: 0;
+  margin-top: 0px;
 }
 
 .modal p {
