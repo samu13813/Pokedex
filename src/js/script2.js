@@ -32,6 +32,8 @@ let pokemonRepository = (function() {
       pokemonImage.classList.add("pokemon-image");
       pokemonImage.src = pokemon.imageUrl;
 
+      console.log(pokemon.name);
+
       let pokemonNameCapital =
         pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
