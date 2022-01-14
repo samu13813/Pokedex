@@ -9,7 +9,9 @@ about the selected pokémon.
 
 - HTML
 - CSS
+  - Bootstrap
 - JavaScript
+  - jQuery
   - Fetch
   - Promise
   - Ajax
