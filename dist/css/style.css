@@ -136,7 +136,7 @@ p {
   }
 }
 
-@media (max-width: 830px) {
+@media (max-width: 800px) {
   .pokemon-list {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -147,8 +147,5 @@ p {
   .pokemon-list {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
-  }
-  .modal-content {
-    width: 150%;
   }
 }
